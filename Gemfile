@@ -17,6 +17,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'react-rails', '~> 2.2.0'
 gem 'jquery-rails', '~> 4.3.1'
 gem 'bootstrap-sass', '~> 3.3.7'
+gem 'bcrypt', '~> 3.1.11'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
