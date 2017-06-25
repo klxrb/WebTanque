@@ -13,6 +13,7 @@
 //= require rails-ujs
 //= require react
 //= require react_ujs
+//= require eventemitter
 //= require components
 //= require jquery
 //= require jquery_ujs

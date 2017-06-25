@@ -14,10 +14,11 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
-gem 'react-rails', '~> 2.2.0'
 gem 'jquery-rails', '~> 4.3.1'
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'bcrypt', '~> 3.1.11'
+gem 'react-rails', '~> 2.2.0'
+gem 'flux-rails-assets', '~> 2.1.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
