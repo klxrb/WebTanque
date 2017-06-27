@@ -5,7 +5,15 @@ RSpec.describe Api::UserController, type: :controller do
   describe "GET #authenticate" do
     let(:valid_user) {
       {
-        username: 'Good name'
+        username: 'Good name',
+        password: 'passw0rd',
+      }
+    }
+
+    let(:valid_user_wrong_password) {
+      {
+        username: 'Good name',
+        password: 'passw1rd',
       }
     }
 
@@ -14,6 +22,19 @@ RSpec.describe Api::UserController, type: :controller do
         username: 'Unknown name'
       }
     }
+
+    let(:user) {
+      User.create(
+        username: valid_user[:username],
+        password: valid_user[:password],
+        password_confirmation: valid_user[:password],
+        email: 'test@example.com'
+      )
+    }
+
+    before(:each) do
+      user
+    end
 
     it "returns http success" do
       post :authenticate, params: { user: valid_user}, format: :json
@@ -25,9 +46,29 @@ RSpec.describe Api::UserController, type: :controller do
       expect(JSON.parse(response.body)['authorised']).to be_truthy
     end
 
+    it 'set a valid user in the session' do
+      post :authenticate, params: { user: valid_user }, format: :json
+      expect(session[:user]).to eq user
+    end
+
+    it 'does not authenticate a valid user with an incorrect password' do
+      post :authenticate, params: { user: valid_user_wrong_password }, format: :json
+      expect(JSON.parse(response.body)['authorised']).to be_falsey
+    end
+
+    it 'does not set a user in the session with an incorrect password' do
+      post :authenticate, params: { user: valid_user_wrong_password }, format: :json
+      expect(session[:user]).to be_nil
+    end
+
     it "does not authenticate an unknown user" do
       post :authenticate, params: { user: unknown_user }, format: :json
       expect(JSON.parse(response.body)['authorised']).to be_falsey
+    end
+
+    it 'does not set a user in the session with an unknown user' do
+      post :authenticate, params: { user: unknown_user }, format: :json
+      expect(session[:user]).to be_nil
     end
   end
 

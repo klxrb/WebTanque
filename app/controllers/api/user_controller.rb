@@ -1,8 +1,10 @@
 module Api
   class UserController < ApplicationController
     def authenticate
-      if user_params[:username] == 'Good name'
+      user = User.find_by_username(user_params[:username])
+      if user && user.authenticate(user_params[:password])
         authorised = true
+        session[:user] = user
       else
         authorised = false
       end

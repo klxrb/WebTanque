@@ -12,10 +12,6 @@ class UserPanel extends React.Component {
     this.headingText = this.headingText.bind(this);
   }
 
-  boo(x) {
-    alert(x);
-  }
-
   setUser(username) {
     this.setState({username: username});
   }
