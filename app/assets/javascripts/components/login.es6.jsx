@@ -6,39 +6,18 @@ class Login extends React.Component {
       password: ''
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value});
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    var self = this;
-    $.ajax({
-      type: "POST",
-      url: "api/user/authenticate",
-      contentType: "application/json",
-      dataType: "json",
-      data: JSON.stringify({
-        user: {
-          username: $.trim(self.state.username)
-        }
-      }),
-      success: function(data) {
-        alert("Success!");
-      }.bind(self),
-      error: function(xhr, status, err) {
-        alert("Failed to log in");
-        console.error(URL, status, err.toString());
-      }
-    });
-  }
 
   render() {
+    var csrf = document.getElementsByName('csrf-token')[0].getAttribute('content');
     return (
-      <form method="post" onSubmit={this.handleSubmit}>
+      <form method="post" action="/authenticate">
+        <input type="hidden" name="authenticity_token" value={ csrf } />
         <div className="form-group">
           <label className="control-label" htmlFor="username">Username</label>
           <input className="form-control" id="username" type="text" name="username" value={this.state.username} onChange={this.handleChange} />

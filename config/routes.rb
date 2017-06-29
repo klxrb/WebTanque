@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'dashboard#index'
 
+  post '/authenticate', to: 'dashboard#authenticate'
+
   namespace :api, defaults: { format: :json } do
     post '/user/authenticate'
     post '/user/register'
