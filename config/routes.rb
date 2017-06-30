@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'dashboard#index'
 
   post '/authenticate', to: 'dashboard#authenticate'
+  post '/logout', to: 'dashboard#logout'
 
   namespace :api, defaults: { format: :json } do
     post '/user/authenticate'

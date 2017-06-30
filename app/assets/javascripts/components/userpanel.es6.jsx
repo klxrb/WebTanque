@@ -2,7 +2,7 @@ class UserPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      username: this.props.username,
       register: false,
       footerText: ''
     }
@@ -25,7 +25,9 @@ class UserPanel extends React.Component {
   }
 
   userPanel() {
-    if (this.state.username === '') {
+    if (this.state.username) {
+      return <p>Not done logged in yet</p>;
+    } else {
       if (this.state.register) {
         return <Register
                  registerUser={this.registerUser}
@@ -35,18 +37,32 @@ class UserPanel extends React.Component {
                  logInUser={this.setUser}
                  registerUser={this.switchRegisterUser} />;
       }
-    } else {
-      return <p>Not done logged in yet</p>;
     }
   }
 
   headingText() {
-    if ( this.state.username !== "" ) {
-      return this.state.username;
+    if ( this.state.username ) {
+      return "Logged in: " + this.state.username;
     } else if ( this.state.register ) {
       return "Register new user";
     } else {
       return "Log in";
+    }
+  }
+
+  footer() {
+    if ( this.state.username ) {
+      var csrf = document.getElementsByName('csrf-token')[0].getAttribute('content');
+      return (
+        <div className="panel-footer">
+          <form method="post" action="logout">
+            <input type="hidden" name="authenticity_token" value={ csrf } />
+            <button className="btn btn-primary" id="logOut" type="submit">Log out</button>
+          </form>
+        </div>
+      )
+    } else {
+      return null;
     }
   }
 
@@ -59,6 +75,7 @@ class UserPanel extends React.Component {
             <div className="panel-body">
               { this.userPanel() }
             </div>
+            { this.footer() }
           </div>
         </div>
       </div>

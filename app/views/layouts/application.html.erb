@@ -27,7 +27,7 @@
     <div class="container theme-showcase" role="main">
       <div class="row">
         <nav>
-          <%= react_component 'UserPanel' %>
+          <%= react_component 'UserPanel', { username: @user && @user.username } %>
         </nav>
       <div class="col-sm-8 col-xs-12">
         <%= yield %>

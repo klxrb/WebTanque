@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
   def index
+    @user = User.find(session['user_id']) if session['user_id']
   end
 
   def authenticate
@@ -10,6 +11,11 @@ class DashboardController < ApplicationController
     else
       session[:user_id] = nil
     end
+    redirect_to '/'
+  end
+
+  def logout
+    session[:'user_id'] = nil
     redirect_to '/'
   end
 
