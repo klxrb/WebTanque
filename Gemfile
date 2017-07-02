@@ -19,6 +19,8 @@ gem 'bootstrap-sass', '~> 3.3.7'
 gem 'bcrypt', '~> 3.1.11'
 gem 'react-rails', '~> 2.2.0'
 gem 'flux-rails-assets', '~> 2.1.0'
+gem 'd3-rails', '~> 4.9.1'
+gem 'rtanque', git: 'https://github.com/jrmhaig/RTanque', branch: 'online_battle'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
