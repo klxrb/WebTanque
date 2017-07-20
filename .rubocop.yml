@@ -1,0 +1,12 @@
+inherit_gem:
+  rubocop-rails:
+    - config/rails.yml
+
+AllCops:
+  TargetRubyVersion: 2.4
+  Exclude:
+    - bin/*
+    - db/schema.rb
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes

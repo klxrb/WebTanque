@@ -21,10 +21,10 @@ class DashboardController < ApplicationController
 
   private
 
-  def user_params
-    params.permit(
-      :username,
-      :password
-    )
-  end
+    def user_params
+      params.permit(
+        :username,
+        :password
+      )
+    end
 end

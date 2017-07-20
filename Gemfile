@@ -1,10 +1,9 @@
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
-
 
 gem 'rails', '~> 5.1.1'
 gem 'sqlite3'
@@ -29,6 +28,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.6.0'
   gem 'pry'
   gem 'rails-controller-testing'
+  gem 'rubocop-rails', '~> 1.0.1', require: false
 end
 
 group :development do

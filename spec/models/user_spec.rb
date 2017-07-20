@@ -74,7 +74,7 @@ RSpec.describe User, type: :model do
     ).to be_invalid
   end
 
-  def test_user options = {}
+  def test_user(options = {})
     {
       username: 'Test user',
       email: 'test@example.com',
