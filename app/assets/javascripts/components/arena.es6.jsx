@@ -2,8 +2,8 @@ class Arena extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      width: 500,
-      height: 350,
+      width: 1200,
+      height: 700,
       ratio: this.props.arenaHeight / this.props.arenaWidth
     };
     this.matchData =  this.props.data;

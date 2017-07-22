@@ -3,33 +3,39 @@ class MainPanel extends React.Component {
     super(props);
     this.state = {
       data: [],
-      arenaWidth: 800,
-      arenaHeight: 200,
-      shells: [
-        {
-          x: Math.random() * 500,
-          y: Math.random() * 500
-        }
-      ],
-      width: 500
+      arenaWidth: 1200,
+      arenaHeight: 700,
+      battle: [],
+      step: 0
     };
     this.getFrame = this.getFrame.bind(this);
   }
 
-  moveDot(dot) {
-    return {
-      x: Math.min(Math.max(dot.x + Math.random() * 21 - 10, 0), this.state.arenaWidth),
-      y: Math.min(Math.max(dot.y + Math.random() * 21 - 10, 0), this.state.arenaHeight)
-    };
+  componentDidMount() {
+    var self = this;
+    $.ajax({
+      type: "GET",
+      url: "api/battle/random",
+      contentType: "application/json",
+      success: function(data) {
+        self.setState({ i: 0 });
+        self.setState({ battle: data });
+      }.bind(self),
+      error: function(xhr, status, err) {
+        console.error(URL, status, err.toString());
+        alert("Failed to load battle");
+      }
+    });
   }
 
   getFrame() {
-    if (this.state) {
-      var newDot = this.moveDot(this.state.shells[0]);
-      this.setState({shells: [ newDot ]});
-      return {
-        shells: this.state.shells
-      };
+    if (this.state && this.state.battle.length > 0) {
+      i = this.state.step;
+      if (i >= this.state.battle.length) {
+        i = 0;
+      }
+      this.setState({step: i+1});
+      return this.state.battle[i];
     } else {
       return {
         shells: []
