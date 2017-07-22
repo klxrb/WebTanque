@@ -1,2 +1,9 @@
 <h1>Dashboard#index</h1>
 <%= react_component 'MainPanel', { data: [5,10,1,3], size: [500,500] } %>
+
+<div id="editor">Some text</div>
+<script>
+  var editor = ace.edit("editor");
+  var RubyMode = ace.require("ace/mode/ruby").Mode;
+  editor.session.setMode(new RubyMode());
+</script>

@@ -19,4 +19,6 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require d3
+//= require ace-rails-ap
+//= require ace/mode-ruby
 //= require_tree .
