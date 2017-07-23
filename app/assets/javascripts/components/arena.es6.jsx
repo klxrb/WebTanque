@@ -52,6 +52,7 @@ class Arena extends React.Component {
     bodies = svg.selectAll("image.body").data(line["bots"]);
     turrets = svg.selectAll("image.turret").data(line["bots"]);
     radars = svg.selectAll("image.radar").data(line["bots"]);
+    names = svg.selectAll("text").data(line["bots"]);
     explosions = svg.selectAll("image.explosion").data(line["explosions"]);
 
     var self = this;
@@ -93,6 +94,20 @@ class Arena extends React.Component {
     bodies.exit().remove();
     turrets.exit().remove();
     radars.exit().remove();
+
+    names
+      .text(function(d) { return d.name; })
+      .attr("x", function(d) { return d.x; })
+      .attr("y", function(d) { return 40 + d.y; })
+      .attr("transform", function(d) { return "scale("+self.state.scale+")" });
+    names
+      .enter()
+      .append("text")
+      .attr("text-anchor", "middle")
+      .attr("font-family", "sans-serif")
+      .attr("font-size", "18px")
+      .attr("fill", "red");
+    names.exit().remove();
 
     setTimeout(this.battle, 5);
   }

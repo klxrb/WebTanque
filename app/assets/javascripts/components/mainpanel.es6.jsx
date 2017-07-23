@@ -34,7 +34,6 @@ class MainPanel extends React.Component {
         i = 0;
       }
       this.setState({step: i+1});
-console.log(this.state.battle[i]);
       return this.state.battle[i];
     } else {
       return {
