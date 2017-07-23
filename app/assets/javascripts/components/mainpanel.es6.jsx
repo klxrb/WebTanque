@@ -2,7 +2,6 @@ class MainPanel extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      data: [],
       arenaWidth: 1200,
       arenaHeight: 700,
       battle: [],
@@ -35,10 +34,13 @@ class MainPanel extends React.Component {
         i = 0;
       }
       this.setState({step: i+1});
+console.log(this.state.battle[i]);
       return this.state.battle[i];
     } else {
       return {
-        shells: []
+        shells: [],
+        bots: [],
+        explosions: []
       };
     }
   }
@@ -52,7 +54,6 @@ class MainPanel extends React.Component {
           <Arena
             arenaWidth={this.state.arenaWidth}
             arenaHeight={this.state.arenaHeight}
-            data={this.state.data}
             size={this.state.size}
             getFrame={this.getFrame} />
         </div>
