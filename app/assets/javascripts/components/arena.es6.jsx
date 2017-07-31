@@ -47,11 +47,13 @@ class Arena extends React.Component {
   battle() {
     const node = this.node;
     var line = this.props.getFrame();
+
     svg = d3.select(node);
     shells = svg.selectAll("circle.shell").data(line["shells"]);
     bodies = svg.selectAll("image.body").data(line["bots"]);
     turrets = svg.selectAll("image.turret").data(line["bots"]);
     radars = svg.selectAll("image.radar").data(line["bots"]);
+    healths = svg.selectAll("image.health").data(line["bots"]);
     names = svg.selectAll("text").data(line["bots"]);
     explosions = svg.selectAll("image.explosion").data(line["explosions"]);
 
@@ -88,12 +90,17 @@ class Arena extends React.Component {
       .attr("transform", function(d) { return "scale("+self.state.scale+")rotate("+(180 - d.turret)+","+d.x+","+d.y+")"});
     this.battle_update(radars, 11, 8)
       .attr("transform", function(d) { return "scale("+self.state.scale+")rotate("+(180 - d.radar)+","+d.x+","+d.y+")"});
+    this.battle_update(healths, 40, -50)
+      .attr("transform", function(d) { return "scale("+self.state.scale+")rotate(0,"+d.x+","+d.y+")"})
+      .attr("width", function(d) { return d.health });
     this.battle_enter(bodies, "body", "../images/body.png", 18, 18);
     this.battle_enter(turrets, "turret", "../images/turret.png", 10, 30);
     this.battle_enter(radars, "radar", "../images/radar.png", 11, 8);
+    this.battle_enter(healths, "health", "../images/health.png", 40, -50);
     bodies.exit().remove();
     turrets.exit().remove();
     radars.exit().remove();
+    healths.exit().remove();
 
     names
       .text(function(d) { return d.name; })
@@ -109,7 +116,7 @@ class Arena extends React.Component {
       .attr("fill", "red");
     names.exit().remove();
 
-    setTimeout(this.battle, 5);
+    setTimeout(this.battle, 15);
   }
 
   render() {

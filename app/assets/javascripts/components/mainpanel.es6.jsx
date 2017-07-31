@@ -31,7 +31,7 @@ class MainPanel extends React.Component {
     if (this.state && this.state.battle.length > 0) {
       i = this.state.step;
       if (i >= this.state.battle.length) {
-        i = 0;
+        i = this.state.battle.length;
       }
       this.setState({step: i+1});
       return this.state.battle[i];
