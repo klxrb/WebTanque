@@ -2,10 +2,8 @@ module Api
   class BattleController < ApplicationController
     def random
       brain_paths = [
-        'sample_bots/seek_and_destroy.rb',
-        'sample_bots/camper.rb',
-        'sample_bots/seek_and_destroy.rb',
-        'sample_bots/camper.rb'
+        'my_bots/jimmy.rb',
+        'my_bots/jimmy.rb',
       ]
 
       @tmpfile = Tempfile.new
